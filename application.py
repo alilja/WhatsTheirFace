@@ -3,18 +3,16 @@ import os
 from operator import itemgetter
 
 from rottentomatoes import RT
-import tmdbsimple as tmdb
 from flask import Flask, render_template, redirect, url_for, request, session
 from werkzeug.contrib.cache import SimpleCache
 
 import search_utils
+import models
 
 # setup flask
 app = Flask(__name__)
 app.secret_key = os.environ.get('SESSION_KEY')
 app.config['PERMANENT_SESSION_LIFETIME'] = 7200  # two hours
-
-tmdb.API_KEY = os.environ.get('TMDB_KEY')
 
 cache = SimpleCache()
 
@@ -58,7 +56,7 @@ def results():
 
         common_actors = []
         for actor in list(set(movies[0].actors) & set(movies[1].actors)):
-            common_actors.append(Actor(actor))
+            common_actors.append(models.Actor(actor))
 
         return render_template(
             "results.html",
@@ -77,7 +75,7 @@ class MovieNotFound(Exception):
 
 def find_movie(text):
     info_regex = re.search(
-        r"(?P<name>[a-zA-Z0-9 '\".,/:;#!$%&-+=_<>?]+) +(?:\((?P<year>\d{4})\))?",
+        r"(?P<name>[a-zA-Z0-9 '\".,/:;#!$%&-+=_<>?]+) ?(?:\((?P<year>\d{4})\))?",
         text
     )
     name = info_regex.group('name')
@@ -120,28 +118,11 @@ def find_movie(text):
     # 4. get cast
     movie_id = int(this_movie['id'])
 
-    return Movie(
+    return models.Movie(
         this_movie['title'],
         this_movie['year'],
         [actor['name'] for actor in RT().info(movie_id, 'cast')['cast']],
     )
-
-
-class Actor(object):
-    image_base_url = "https://image.tmdb.org/t/p/w500"
-
-    def __init__(self, name):
-        self.name = name
-
-        person_db = tmdb.Search().person(query=name)
-        self.image = Actor.image_base_url + person_db['results'][0]['profile_path']
-
-
-class Movie(object):
-    def __init__(self, title, year, actors):
-        self.title = title
-        self.year = year
-        self.actors = actors
 
 
 if __name__ == '__main__':
