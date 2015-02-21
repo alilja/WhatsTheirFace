@@ -51,8 +51,8 @@ def results():
             if not search_string:
                 # if the search string is blank, check to see if we have one
                 # stored in the session cookie
-                if field_name in session:
-                    search_string = session[field_name]
+                if "movie" in session:
+                    search_string = session["movie"]
                 else:
                     return render_template("empty_error.html", movie_name="")
 
