@@ -14,13 +14,15 @@ app.secret_key = "sadjkada"
     I think this actor was also in [        ] """
 
 # first time, load most popular rental in first spot
-
+# first slot should be saved within a 2-3 hour period and then cleared
+# second slot should always be empty
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        session['movie_one'] = request.form['movie_one']  # this should be saved within a 2-3 hour period and then cleared
-        session['movie_two'] = request.form['movie_two']  # this should always be empty
+        for field in request.form:
+            session[field] = request.form.get(field)
+        app.logger.debug(session)
         return redirect(url_for('results'))
     return render_template("index.html")
 
@@ -28,18 +30,23 @@ def index():
 @app.route('/results/')
 def results():
     if 'movie_one' in session and 'movie_two' in session:
-        try:
-            movie_one = find_movie(session['movie_one'])
-            movie_two = find_movie(session['movie_two'])
-        except MovieNotFound as not_found:
-            return render_template("error.html", movie_name=not_found.args[0])
-        common_actors = list(set(movie_one[2]) & set(movie_two[2]))
+        movies = []
+        for _, movie_title in session.items():
+            if len(movie_title) <= 1:
+                continue
+            try:
+                movie = find_movie(movie_title)
+            except MovieNotFound as not_found:
+                return render_template("error.html", movie_name=not_found.args[0])
+            movies.append(movie)
+
+        common_actors = list(set(movies[0][-1]) & set(movies[1][-1]))
         return render_template(
             "results.html",
-            current_name=movie_one[0],
-            current_date=movie_one[1],
-            other_name=movie_two[0],
-            other_date=movie_two[1],
+            current_name=movies[0][0],
+            current_date=movies[0][1],
+            other_name=movies[1][0],
+            other_date=movies[1][1],
             common_actors=common_actors,
         )
     return redirect(url_for('index'))  # this should remember your previous searches and display them
