@@ -12,6 +12,11 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('SESSION_KEY')
 app.config['PERMANENT_SESSION_LIFETIME'] = 7200  # two hours
 
+import sys
+import logging
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
+
 cache = SimpleCache()
 
 
