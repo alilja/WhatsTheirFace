@@ -1,4 +1,4 @@
-<b>Search for the actor in {{ current_name }} ({{ current_date }}) and {{ other_name }} ({{ other_date }}):</b><br>
+<b>Search for the actor in {{ current_movie.title }} ({{ current_movie.year }}) and {{ other_movie.title }} ({{ other_movie.year }}):</b><br>
 <ul>
 {% for actor in common_actors %}
 	<li><img src="{{ actor.image }}" /><br />{{ actor.name }}</li>

@@ -14,6 +14,8 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('SESSION_KEY')
 app.config['PERMANENT_SESSION_LIFETIME'] = 7200  # two hours
 
+models.app = app
+
 cache = SimpleCache()
 
 
@@ -60,13 +62,11 @@ def results():
 
         return render_template(
             "results.html",
-            current_name=movies[0].title,
-            current_date=movies[0].year,
-            other_name=movies[1].title,
-            other_date=movies[1].year,
+            current_movie=movies[0],
+            other_movie=movies[1],
             common_actors=common_actors,
         )
-    return redirect(url_for('index'))  # this should remember your previous searches and display them
+    return redirect(url_for('index'))
 
 
 class MovieNotFound(Exception):
@@ -80,8 +80,6 @@ def find_movie(text):
     )
     name = info_regex.group('name')
     year = info_regex.group('year')
-    app.logger.debug(name)
-    app.logger.debug(year)
 
     # 1. search
     try:
