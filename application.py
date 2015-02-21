@@ -3,29 +3,20 @@ import os
 from operator import itemgetter
 
 from rottentomatoes import RT
+import tmdbsimple as tmdb
 from flask import Flask, render_template, redirect, url_for, request, session
 from werkzeug.contrib.cache import SimpleCache
 
 import search_utils
 
+# setup flask
 app = Flask(__name__)
 app.secret_key = os.environ.get('SESSION_KEY')
 app.config['PERMANENT_SESSION_LIFETIME'] = 7200  # two hours
 
-import sys
-import logging
-app.logger.addHandler(logging.StreamHandler(sys.stdout))
-app.logger.setLevel(logging.ERROR)
+tmdb.API_KEY = os.environ.get('TMDB_KEY')
 
 cache = SimpleCache()
-
-
-"""       Right now I'm watching [            ].
-    I think one of the actors was also in [        ].
-
-               [ Were They? ] """
-
-# first time, load most popular rental in first spot
 
 
 @app.route('/')
@@ -62,16 +53,19 @@ def results():
                 return render_template("error.html", movie_name=not_found.args[0])
 
             if field_name == "movie_one":
-                session['movie'] = movie[0]
+                session['movie'] = movie.title
             movies.append(movie)
 
-        common_actors = list(set(movies[0][-1]) & set(movies[1][-1]))
+        common_actors = []
+        for actor in list(set(movies[0].actors) & set(movies[1].actors)):
+            common_actors.append(Actor(actor))
+
         return render_template(
             "results.html",
-            current_name=movies[0][0],
-            current_date=movies[0][1],
-            other_name=movies[1][0],
-            other_date=movies[1][1],
+            current_name=movies[0].title,
+            current_date=movies[0].year,
+            other_name=movies[1].title,
+            other_date=movies[1].year,
             common_actors=common_actors,
         )
     return redirect(url_for('index'))  # this should remember your previous searches and display them
@@ -83,12 +77,13 @@ class MovieNotFound(Exception):
 
 def find_movie(text):
     info_regex = re.search(
-        (r"(?P<name>[a-zA-Z0-9 '\".,/:;#!$%&-+=_<>?]+)"
-         r" *(?:\((?P<year>\d{4})\))?"),
+        r"(?P<name>[a-zA-Z0-9 '\".,/:;#!$%&-+=_<>?]+) +(?:\((?P<year>\d{4})\))?",
         text
     )
     name = info_regex.group('name')
     year = info_regex.group('year')
+    app.logger.debug(name)
+    app.logger.debug(year)
 
     # 1. search
     try:
@@ -125,11 +120,28 @@ def find_movie(text):
     # 4. get cast
     movie_id = int(this_movie['id'])
 
-    return (
+    return Movie(
         this_movie['title'],
         this_movie['year'],
         [actor['name'] for actor in RT().info(movie_id, 'cast')['cast']],
     )
+
+
+class Actor(object):
+    image_base_url = "https://image.tmdb.org/t/p/w500"
+
+    def __init__(self, name):
+        self.name = name
+
+        person_db = tmdb.Search().person(query=name)
+        self.image = Actor.image_base_url + person_db['results'][0]['profile_path']
+
+
+class Movie(object):
+    def __init__(self, title, year, actors):
+        self.title = title
+        self.year = year
+        self.actors = actors
 
 
 if __name__ == '__main__':

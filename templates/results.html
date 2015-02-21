@@ -1,7 +1,7 @@
 <b>Search for the actor in {{ current_name }} ({{ current_date }}) and {{ other_name }} ({{ other_date }}):</b><br>
 <ul>
 {% for actor in common_actors %}
-	<li>{{actor}}</li>
+	<li><img src="{{ actor.image }}" /><br />{{ actor.name }}</li>
 {% endfor %}
 </ul>
 
