@@ -10,34 +10,45 @@ app = Flask(__name__)
 app.secret_key = "sadjkada"
 
 
-""" Right now I'm watching [           ], and
-    I think this actor was also in [        ] """
+"""       Right now I'm watching [            ].
+    I think one of the actors was also in [        ].
+
+               [ Were They? ] """
 
 # first time, load most popular rental in first spot
 # first slot should be saved within a 2-3 hour period and then cleared
 # second slot should always be empty
 
-@app.route('/', methods=['GET', 'POST'])
+
+@app.route('/')
 def index():
-    if request.method == 'POST':
-        for field in request.form:
-            session[field] = request.form.get(field)
-        app.logger.debug(session)
-        return redirect(url_for('results'))
-    return render_template("index.html")
+    placeholder = ""
+    if "movie_one" in session:
+        placeholder = session['movie_one']
+    return render_template("index.html", first_placeholder=placeholder)
 
 
-@app.route('/results/')
+@app.route('/results/', methods=['GET', 'POST'])
 def results():
-    if 'movie_one' in session and 'movie_two' in session:
+    if request.method == 'POST':
         movies = []
-        for _, movie_title in session.items():
-            if len(movie_title) <= 1:
-                continue
+        for field_name in request.form:
+            search_string = request.form.get(field_name)
+            if not search_string:
+                # if the search string is blank, check to see if we have one
+                # stored in the session cookie
+                if field_name in session:
+                    search_string = session[field_name]
+                else:
+                    return render_template("empty_error.html", movie_name="")
+
             try:
-                movie = find_movie(movie_title)
+                movie = find_movie(search_string)
             except MovieNotFound as not_found:
                 return render_template("error.html", movie_name=not_found.args[0])
+
+            if field_name == "movie_one":
+                session[field_name] = movie[0]
             movies.append(movie)
 
         common_actors = list(set(movies[0][-1]) & set(movies[1][-1]))
@@ -85,7 +96,6 @@ def find_movie(text):
         if rank >= highest_rank:
             movies.append(movie)
             highest_rank = rank
-
     if not movies:
         raise MovieNotFound(name)
 
