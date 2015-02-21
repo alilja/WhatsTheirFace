@@ -4,12 +4,15 @@ from operator import itemgetter
 
 from rottentomatoes import RT
 from flask import Flask, render_template, redirect, url_for, request, session
+from werkzeug.contrib.cache import SimpleCache
 
 import search_utils
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SESSION_KEY')
 app.config['PERMANENT_SESSION_LIFETIME'] = 7200  # two hours
+
+cache = SimpleCache()
 
 
 """       Right now I'm watching [            ].
@@ -23,8 +26,14 @@ app.config['PERMANENT_SESSION_LIFETIME'] = 7200  # two hours
 @app.route('/')
 def index():
     placeholder = ""
-    if "movie_one" in session:
-        placeholder = session['movie_one']
+    if "movie" in session:
+        placeholder = session['movie']
+    else:
+        placeholder = cache.get('top_rental')
+        if not placeholder:
+            top_rentals = RT().lists('dvds', 'top_rentals')
+            placeholder = top_rentals['movies'][0]['title']
+            cache.set('top_rental', placeholder, timeout=60 * 60 * 24)
     return render_template("index.html", first_placeholder=placeholder)
 
 
@@ -48,7 +57,7 @@ def results():
                 return render_template("error.html", movie_name=not_found.args[0])
 
             if field_name == "movie_one":
-                session[field_name] = movie[0]
+                session['movie'] = movie[0]
             movies.append(movie)
 
         common_actors = list(set(movies[0][-1]) & set(movies[1][-1]))
@@ -116,6 +125,7 @@ def find_movie(text):
         this_movie['year'],
         [actor['name'] for actor in RT().info(movie_id, 'cast')['cast']],
     )
+
 
 if __name__ == '__main__':
     app.run(debug=True)
