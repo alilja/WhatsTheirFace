@@ -1,4 +1,5 @@
 import re
+import os
 from operator import itemgetter
 
 from rottentomatoes import RT
@@ -7,7 +8,8 @@ from flask import Flask, render_template, redirect, url_for, request, session
 import search_utils
 
 app = Flask(__name__)
-app.secret_key = "sadjkada"
+app.secret_key = os.environ.get('SESSION_KEY')
+app.config['PERMANENT_SESSION_LIFETIME'] = 7200  # two hours
 
 
 """       Right now I'm watching [            ].
@@ -16,8 +18,6 @@ app.secret_key = "sadjkada"
                [ Were They? ] """
 
 # first time, load most popular rental in first spot
-# first slot should be saved within a 2-3 hour period and then cleared
-# second slot should always be empty
 
 
 @app.route('/')
@@ -91,7 +91,6 @@ def find_movie(text):
         if movie['title'].lower() == name.lower():
             movies = [movie]
             break
-
         rank = search_utils.string_similarity(name, movie['title'])
         if rank >= highest_rank:
             movies.append(movie)
