@@ -13,12 +13,14 @@ app.secret_key = "sadjkada"
 """ Right now I'm watching [           ], and
     I think this actor was also in [        ] """
 
+# first time, load most popular rental in first spot
+
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        session['movie_one'] = request.form['movie_one'] # this should be saved within a 2-3 hour period and then cleared
-        session['movie_two'] = request.form['movie_two'] # this should always be empty
+        session['movie_one'] = request.form['movie_one']  # this should be saved within a 2-3 hour period and then cleared
+        session['movie_two'] = request.form['movie_two']  # this should always be empty
         return redirect(url_for('results'))
     return render_template("index.html")
 
@@ -26,11 +28,21 @@ def index():
 @app.route('/results/')
 def results():
     if 'movie_one' in session and 'movie_two' in session:
-        movie_one = find_movie(session['movie_one'])
-        movie_two = find_movie(session['movie_two'])
+        try:
+            movie_one = find_movie(session['movie_one'])
+            movie_two = find_movie(session['movie_two'])
+        except MovieNotFound as not_found:
+            return render_template("error.html", movie_name=not_found.args[0])
         common_actors = list(set(movie_one[2]) & set(movie_two[2]))
-        return str(common_actors)
-    return redirect(url_for('index')) # this should remember your previous searches and display them
+        return render_template(
+            "results.html",
+            current_name=movie_one[0],
+            current_date=movie_one[1],
+            other_name=movie_two[0],
+            other_date=movie_two[1],
+            common_actors=common_actors,
+        )
+    return redirect(url_for('index'))  # this should remember your previous searches and display them
 
 
 class MovieNotFound(Exception):
@@ -50,7 +62,7 @@ def find_movie(text):
     try:
         results = RT().search(name)
     except:
-        raise MovieNotFound
+        raise MovieNotFound(name)
 
     # 2. find the movies with the closest title similarities
     highest_rank = 0
@@ -67,6 +79,9 @@ def find_movie(text):
             movies.append(movie)
             highest_rank = rank
 
+    if not movies:
+        raise MovieNotFound(name)
+
     # 3. figure out which movie we're talking about
     this_movie = None
     if year is None:
@@ -75,7 +90,7 @@ def find_movie(text):
         try:
             this_movie = (movie for movie in movies if movie['year'] == int(year)).next()
         except:
-            raise MovieNotFound
+            raise MovieNotFound(name)
 
     # 4. get cast
     movie_id = int(this_movie['id'])
