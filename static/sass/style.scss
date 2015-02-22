@@ -1,8 +1,9 @@
 @import "meyer-reset";
 
-$accent-color: #CF4647;
-$dark-color: #524656;
-$grey: #f1f1f1;
+$accent-color: #CC2649;
+$dark-accent-color: #992C4B;
+$dark-color: #525252;
+$grey: #dfdfdf;
 
 $breakpoint: 580px;
 
@@ -60,20 +61,43 @@ $breakpoint: 580px;
 
 body {
 	font-family: Helvetica, sans-serif;
-	font-color: $dark-color;
-	background: #fff;
+	color: #fff;
+	background: $accent-color;
 }
 
 #above {
 	letter-spacing: -0.1em;
 
-	form {
-		font-family: 'Bitter', serif;
-		font-size: 1.5em;
+	#header {
+		margin-top: 3em;
+
+		h1 {
+			font-family: 'Bitter', serif;
+			font-weight: bold;
+			font-size: 2em;
+			line-height: auto;
+			text-align: center;
+			color: #fff;
+			letter-spacing: 0em;
+		}
+	}
+
+	.question_box{
+		padding: 1em 0 0.5em 0;
+		background: #fff;
+		color: $dark-color;
+		outline: 1px solid #fff;
+		outline-offset: 0.5em;
 	}
 
 	div {
 		line-height: 2.25em;
+	}
+
+	form {
+		margin-top: 5em;
+		font-family: 'Bitter', serif;
+		font-size: 1.5em;
 	}
 
 	input {
@@ -89,9 +113,15 @@ body {
 	.button {
 		padding: 0.25em 1.5em;
 		margin: 0.5em;
-		background: $accent-color;
+		background: $dark-accent-color;
 		font-weight: normal;
 		color: #fff;
+	}
+
+	.movie_info {
+		font-family: 'Bitter', serif;
+		font-size: 1.5em;
+		text-align: center;
 	}
 
 	.poster {
@@ -109,7 +139,7 @@ body {
 }
 
 #below {
-	background-color: $dark-color;
+	background-color: $dark-accent-color;;
 	padding: 2em;
 	#actors li{
 		display: inline;

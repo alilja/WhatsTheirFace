@@ -86,19 +86,36 @@ table {
     width: 100%; } }
 body {
   font-family: Helvetica, sans-serif;
-  font-color: #524656;
-  background: #fff; }
+  color: #fff;
+  background: #CC2649; }
 
 #above {
   letter-spacing: -0.1em; }
-  #above form {
-    font-family: 'Bitter', serif;
-    font-size: 1.5em; }
+  #above #header {
+    margin-top: 3em; }
+    #above #header h1 {
+      font-family: 'Bitter', serif;
+      font-weight: bold;
+      font-size: 2em;
+      line-height: auto;
+      text-align: center;
+      color: #fff;
+      letter-spacing: 0em; }
+  #above .question_box {
+    padding: 1em 0 0.5em 0;
+    background: #fff;
+    color: #525252;
+    outline: 1px solid #fff;
+    outline-offset: 0.5em; }
   #above div {
     line-height: 2.25em; }
+  #above form {
+    margin-top: 5em;
+    font-family: 'Bitter', serif;
+    font-size: 1.5em; }
   #above input {
     font: inherit;
-    background: #f1f1f1;
+    background: #dfdfdf;
     border: none;
     line-height: 1.5em;
     text-align: center;
@@ -107,9 +124,13 @@ body {
   #above .button {
     padding: 0.25em 1.5em;
     margin: 0.5em;
-    background: #CF4647;
+    background: #992C4B;
     font-weight: normal;
     color: #fff; }
+  #above .movie_info {
+    font-family: 'Bitter', serif;
+    font-size: 1.5em;
+    text-align: center; }
   #above .poster img {
     width: 100%; }
   @media only screen and (max-width: 580px) {
@@ -118,7 +139,7 @@ body {
       margin: 1% 0.8% 1% 0.8%; } }
 
 #below {
-  background-color: #524656;
+  background-color: #992C4B;
   padding: 2em; }
   #below #actors li {
     display: inline; }

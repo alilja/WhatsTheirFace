@@ -1,28 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="section group">
+	<div id="header" class="col span_6_of_6">
+		<h1>What's Their Face?</h1>
+	</div>
+</div>
 <form action="{{ url_for("results") }}" method="post" class="form" style="text-align: center;">
 	<div class="section group">
 		<div class="col span_1_of_6"></div>
-		<div class="col span_4_of_6">
-			Right now, I'm watching
-			<input type="text" name="movie_one" placeholder="{{ first_placeholder }}"/>.
+
+		<div class="col span_4_of_6 question_box">
+			<div class="section group">
+				<div class="col span_6_of_6 question_line">
+					Right now, I'm watching
+					<input type="text" name="movie_one" placeholder="{{ first_placeholder }}"/>.
+				</div>
+			</div>
+			<div class="section group">
+				<div class="col span_6_of_6 question_line">
+					I think one of the actors was also in
+					<input type="text" name="movie_two" placeholder="{{ second_placeholder }}"/>.
+				</div>
+			</div>
+			<div class="section group">
+				<div class="col span_2_of_6"></div>
+				<div class="col span_2_of_6">
+					<input class="button" type="submit" value="Were They?" />
+				</div>
+				<div class="col span_2_of_6"></div>
+			</div>
 		</div>
 		<div class="col span_1_of_6"></div>
-	</div>
-	<div class="section group">
-		<div class="col span_1_of_6"></div>
-		<div class="col span_4_of_6">
-			I think one of the actors was also in
-			<input type="text" name="movie_two" placeholder="{{ second_placeholder }}"/>.
-		</div>
-		<div class="col span_1_of_6"></div>
-	</div>
-	<div class="section group">
-		<div class="col span_2_of_6"></div>
-		<div class="col span_2_of_6">
-			<input class="button" type="submit" value="Were They?" />
-		</div>
-		<div class="col span_2_of_6"></div>
 	</div>
 </form>
 {% endblock %}

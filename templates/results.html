@@ -5,10 +5,13 @@
 	<div class="col span_2_of_6"></div>
 	<div class="col span_1_of_6 poster">
 		<img src="{{ current_movie.poster_image }}" />
+		<span class="movie_info">{{ current_movie.title }}<br />({{ current_movie.year }})</span>
 	</div>
 	<div class="col span_1_of_6 poster">
 		<img src="{{ other_movie.poster_image }}" />
+		<span class="movie_info">{{ other_movie.title }}<br />({{ other_movie.year }})</span>
 	</div>
+	<div class="col span_2_of_6"></div>
 </div>
 {% endblock %}
 
