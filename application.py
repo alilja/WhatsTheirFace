@@ -25,11 +25,15 @@ def index():
     if "movie" in session:
         placeholder = session['movie']
     else:
-        placeholder = cache.get('top_rental')
+        top_rental = cache.get('top_rental')
         if not placeholder:
-            top_rentals = RT().lists('dvds', 'top_rentals')
-            placeholder = top_rentals['movies'][0]['title']
-            cache.set('top_rental', placeholder, timeout=60 * 60 * 24)
+            top_rentals_rt = RT().lists('dvds', 'top_rentals')
+            top_rental = models.Movie(
+                top_rentals_rt['movies'][0]['title'],
+                top_rentals_rt['movies'][0]['year'],
+            )
+            cache.set('top_rental', top_rental, timeout=60 * 60 * 24)
+            placeholder = top_rental.title
     return render_template("index.html", first_placeholder=placeholder)
 
 
@@ -45,7 +49,11 @@ def results():
                 if "movie" in session:
                     search_string = session["movie"]
                 else:
-                    return render_template("empty_error.html", movie_name="")
+                    top_rental = cache.get('top_rental')
+                    if not top_rental:
+                        return render_template("empty_error.html", movie_name="")
+                    else:
+                        search_string = top_rental.title
 
             try:
                 movie = find_movie(search_string)

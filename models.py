@@ -19,7 +19,7 @@ class Actor(object):
 
 
 class Movie(object):
-    def __init__(self, title, year, actors):
+    def __init__(self, title, year, actors=None):
         self.title = title
         self.year = year
         self.actors = actors

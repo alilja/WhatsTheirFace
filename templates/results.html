@@ -1,4 +1,7 @@
-<b>Search for the actor in {{ current_movie.title }} ({{ current_movie.year }}) and {{ other_movie.title }} ({{ other_movie.year }}):</b><br>
+{% extends "base.html" %}
+{% block title %}{{ current_movie.title }} and {{ other_movie.title }}{% endblock %}
+{% block content %}
+<b>Results for the actors in {{ current_movie.title }} ({{ current_movie.year }}) and {{ other_movie.title }} ({{ other_movie.year }}):</b><br>
 <ul>
 {% for actor in common_actors %}
 	<li><img src="{{ actor.image }}" /><br />{{ actor.name }}</li>
@@ -6,3 +9,4 @@
 </ul>
 
 <a href="{{ url_for('index') }}">Search again</a>
+{% endblock %}
