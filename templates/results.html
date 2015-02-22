@@ -2,9 +2,17 @@
 {% block title %}{{ current_movie.title }} and {{ other_movie.title }}{% endblock %}
 {% block content %}
 <b>Results for the actors in {{ current_movie.title }} ({{ current_movie.year }}) and {{ other_movie.title }} ({{ other_movie.year }}):</b><br>
-<ul>
+{% endblock %}
+
+{% block below %}
+<ul id="actors">
 {% for actor in common_actors %}
-	<li><img src="{{ actor.image }}" /><br />{{ actor.name }}</li>
+	<li>
+		<span>
+			{{ actor.name }}
+			<img src="{{ actor.image }}" />
+		</span>
+	</li>
 {% endfor %}
 </ul>
 

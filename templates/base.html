@@ -3,10 +3,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>What's Their Name? {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Bitter:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    <div id="content">
+    <div id="above">
         {% block content %}{% endblock %}
+    </div>
+    <div id="below">
+        {% block below %}{% endblock %}
     </div>
     <div id="footer">
         {% block footer %}

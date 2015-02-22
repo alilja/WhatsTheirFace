@@ -44,16 +44,19 @@ def results():
         for field_name in request.form:
             search_string = request.form.get(field_name)
             if not search_string:
-                # if the search string is blank, check to see if we have one
-                # stored in the session cookie
-                if "movie" in session:
-                    search_string = session["movie"]
-                else:
-                    top_rental = cache.get('top_rental')
-                    if not top_rental:
-                        return render_template("empty_error.html", movie_name="")
+                if field_name == "movie_one":
+                    # if the search string is blank, check to see if we have one
+                    # stored in the session cookie
+                    if "movie" in session:
+                        search_string = session["movie"]
                     else:
-                        search_string = top_rental.title
+                        top_rental = cache.get('top_rental')
+                        if not top_rental:
+                            return render_template("empty_error.html", movie_name="")
+                        else:
+                            search_string = top_rental.title
+                else:
+                    return render_template("empty_error.html", movie_name="")
 
             try:
                 movie = find_movie(search_string)
@@ -66,6 +69,7 @@ def results():
 
         common_actors = []
         for actor in list(set(movies[0].actors) & set(movies[1].actors)):
+
             common_actors.append(models.Actor(actor))
 
         return render_template(
