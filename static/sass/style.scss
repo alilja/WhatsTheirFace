@@ -1,0 +1,132 @@
+@import "meyer-reset";
+
+$accent-color: #CF4647;
+$dark-color: #524656;
+$grey: #f1f1f1;
+
+$breakpoint: 580px;
+
+/*  SECTIONS  */
+.section {
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+
+/*  COLUMN SETUP  */
+.col {
+	display: block;
+	float:left;
+	margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0; }
+
+/*  GROUPING  */
+.group:before,
+.group:after { content:""; display:table; }
+.group:after { clear:both;}
+.group { zoom:1; /* For IE 6/7 */ }
+/*  GRID OF SIX  */
+.span_6_of_6 {
+	width: 100%;
+}
+
+.span_5_of_6 {
+  	width: 83.06%;
+}
+
+.span_4_of_6 {
+  	width: 66.13%;
+}
+
+.span_3_of_6 {
+  	width: 49.2%;
+}
+
+.span_2_of_6 {
+  	width: 32.26%;
+}
+
+.span_1_of_6 {
+  	width: 15.33%;
+}
+
+/*  GO FULL WIDTH BELOW 480 PIXELS */
+@media only screen and (max-width: $breakpoint) {
+	.col {  margin: 1% 0 1% 0%; }
+	.span_1_of_6, .span_2_of_6, .span_3_of_6, .span_4_of_6, .span_5_of_6, .span_6_of_6 { width: 100%; }
+}
+
+
+body {
+	font-family: Helvetica, sans-serif;
+	font-color: $dark-color;
+	background: #fff;
+}
+
+#above {
+	letter-spacing: -0.1em;
+
+	form {
+		font-family: 'Bitter', serif;
+		font-size: 1.5em;
+	}
+
+	div {
+		line-height: 2.25em;
+	}
+
+	input {
+		font: inherit;
+		background: $grey;
+		border: none;
+		line-height: 1.5em;
+		text-align: center;
+		font-weight: bold;
+		padding: 0.25em;
+	}
+
+	.button {
+		padding: 0.25em 1.5em;
+		margin: 0.5em;
+		background: $accent-color;
+		font-weight: normal;
+		color: #fff;
+	}
+
+	.poster {
+		img {
+			width: 100%;
+		}
+	}
+
+	@media only screen and (max-width: $breakpoint) {
+		.poster {
+			width: 48.4%;
+			margin: 1% 0.8% 1% 0.8%;
+		}
+	}
+}
+
+#below {
+	background-color: $dark-color;
+	padding: 2em;
+	#actors li{
+		display: inline;
+
+		img{
+			width: 175px;
+		}
+	}
+
+	img {
+		width: 100%;
+	}
+
+	@media only screen and (max-width: $breakpoint) {
+		img{
+			display: none;
+		}
+	}
+
+}

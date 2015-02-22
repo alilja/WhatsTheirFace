@@ -69,14 +69,25 @@ def results():
 
         common_actors = []
         for actor in list(set(movies[0].actors) & set(movies[1].actors)):
-
             common_actors.append(models.Actor(actor))
+
+        six_column = []
+        i = 0
+        temp = []
+        for actor in common_actors:
+            if i == 6:
+                six_column.append(temp)
+                temp = []
+                i = 0
+            temp.append(actor)
+            i += 1
+        six_column.append(temp)
 
         return render_template(
             "results.html",
             current_movie=movies[0],
             other_movie=movies[1],
-            common_actors=common_actors,
+            common_actors=six_column,
         )
     return redirect(url_for('index'))
 

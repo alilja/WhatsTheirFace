@@ -1,0 +1,133 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after {
+  content: "";
+  content: none; }
+
+q:before, q:after {
+  content: "";
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/*  SECTIONS  */
+.section {
+  clear: both;
+  padding: 0px;
+  margin: 0px; }
+
+/*  COLUMN SETUP  */
+.col {
+  display: block;
+  float: left;
+  margin: 1% 0 1% 1.6%; }
+
+.col:first-child {
+  margin-left: 0; }
+
+/*  GROUPING  */
+.group:before,
+.group:after {
+  content: "";
+  display: table; }
+
+.group:after {
+  clear: both; }
+
+.group {
+  zoom: 1;
+  /* For IE 6/7 */ }
+
+/*  GRID OF SIX  */
+.span_6_of_6 {
+  width: 100%; }
+
+.span_5_of_6 {
+  width: 83.06%; }
+
+.span_4_of_6 {
+  width: 66.13%; }
+
+.span_3_of_6 {
+  width: 49.2%; }
+
+.span_2_of_6 {
+  width: 32.26%; }
+
+.span_1_of_6 {
+  width: 15.33%; }
+
+/*  GO FULL WIDTH BELOW 480 PIXELS */
+@media only screen and (max-width: 580px) {
+  .col {
+    margin: 1% 0 1% 0%; }
+
+  .span_1_of_6, .span_2_of_6, .span_3_of_6, .span_4_of_6, .span_5_of_6, .span_6_of_6 {
+    width: 100%; } }
+body {
+  font-family: Helvetica, sans-serif;
+  font-color: #524656;
+  background: #fff; }
+
+#above {
+  letter-spacing: -0.1em; }
+  #above form {
+    font-family: 'Bitter', serif;
+    font-size: 1.5em; }
+  #above div {
+    line-height: 2.25em; }
+  #above input {
+    font: inherit;
+    background: #f1f1f1;
+    border: none;
+    line-height: 1.5em;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.25em; }
+  #above .button {
+    padding: 0.25em 1.5em;
+    margin: 0.5em;
+    background: #CF4647;
+    font-weight: normal;
+    color: #fff; }
+  #above .poster img {
+    width: 100%; }
+  @media only screen and (max-width: 580px) {
+    #above .poster {
+      width: 48.4%;
+      margin: 1% 0.8% 1% 0.8%; } }
+
+#below {
+  background-color: #524656;
+  padding: 2em; }
+  #below #actors li {
+    display: inline; }
+    #below #actors li img {
+      width: 175px; }
+  #below img {
+    width: 100%; }
+  @media only screen and (max-width: 580px) {
+    #below img {
+      display: none; } }
+
+/*# sourceMappingURL=style.css.map */

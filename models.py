@@ -15,7 +15,10 @@ class Actor(object):
         self.name = name
 
         person_db = tmdb.Search().person(query=name)
-        self.image = get_image_url(person_db['results'][0]['profile_path'])
+        try:
+            self.image = get_image_url(person_db['results'][0]['profile_path'])
+        except:
+            self.image = None
 
 
 class Movie(object):
