@@ -1,0 +1,75 @@
+$breakpoint: 580px;
+
+/*  SECTIONS  */
+.section {
+  clear: both;
+  padding: 0px;
+  margin: 0px;
+}
+
+/*  COLUMN SETUP  */
+.col {
+  display: block;
+  float:left;
+  margin: 1% 0 1% 2%;
+}
+.col:first-child { margin-left: 0; }
+
+/*  GROUPING  */
+.group:before,
+.group:after { content:""; display:table; }
+.group:after { clear:both;}
+.group { zoom:1; /* For IE 6/7 */ }
+/*  GRID OF ELEVEN  */
+.span_11_of_11 {
+  width: 100%;
+}
+
+.span_10_of_11 {
+    width: 90.72%;
+}
+
+.span_9_of_11 {
+    width: 81.45%;
+}
+
+.span_8_of_11 {
+    width: 72.18%;
+}
+
+.span_7_of_11 {
+    width: 62.90%;
+}
+
+.span_6_of_11 {
+    width: 53.63%;
+}
+
+.span_5_of_11 {
+    width: 44.36%;
+}
+
+.span_4_of_11 {
+    width: 35.09%;
+}
+
+.span_3_of_11 {
+    width: 25.81%;
+}
+
+.span_2_of_11 {
+    width: 16.54%;
+}
+
+.span_1_of_11 {
+    width: 7.272%;
+}
+
+/*  GO FULL WIDTH BELOW 480 PIXELS */
+@media only screen and (max-width: $breakpoint) {
+  .col {  margin: 1% 0 1% 0%; }
+
+    .span_1_of_11, .span_2_of_11, .span_3_of_11, .span_4_of_11, .span_5_of_11, .span_6_of_11, .span_7_of_11, .span_8_of_11, .span_9_of_11, .span_10_of_11, .span_11_of_11 {
+  width: 100%;
+  }
+}
