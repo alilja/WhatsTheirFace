@@ -29,7 +29,7 @@ class Movie(object):
 
         movie_db = tmdb.Search().movie(query=title, year=year)
         try:
-            self.backdrop_image = get_image_url(movie_db['results'][0]['backdrop_path'], 1024)
+            self.backdrop_image = get_image_url(movie_db['results'][0]['backdrop_path'], 1000)
         except IndexError:
             self.backdrop_image = None
 
@@ -37,3 +37,6 @@ class Movie(object):
             self.poster_image = get_image_url(movie_db['results'][0]['poster_path'], 500)
         except IndexError:
             self.poster_image = None
+
+    def __str__(self):
+        return self.title

@@ -2,32 +2,41 @@
 {% block title %}{{ current_movie.title }} and {{ other_movie.title }}{% endblock %}
 {% block content %}
 <div class="section group">
-	<div class="col span_2_of_6"></div>
-	<div class="col span_1_of_6 poster">
-		<img src="{{ current_movie.poster_image }}" />
-		<span class="movie_info">{{ current_movie.title }}<br />({{ current_movie.year }})</span>
-	</div>
-	<div class="col span_1_of_6 poster">
-		<img src="{{ other_movie.poster_image }}" />
-		<span class="movie_info">{{ other_movie.title }}<br />({{ other_movie.year }})</span>
-	</div>
-	<div class="col span_2_of_6"></div>
-</div>
-{% endblock %}
-
-{% block below %}
-<div id="below">
-{% for row in common_actors %}
-	<div class="section group">
-		{% for actor in row %}
-		<div class="col span_1_of_6">
-			{{ actor.name }}
-			<img src="{{ actor.image }}" />
+	<div class="col span_4_of_11 posters">
+		<div class="section group">
+			<div class="col span_11_of_11">
+				Actors in <br />{{ current_movie.title }} ({{ current_movie.year }})<br />{{ other_movie.title }} ({{ other_movie.year }})
+			</div>
 		</div>
-		{% endfor %}
+		<div class="section group">
+			<div class="col span_5_of_11">
+				<div class="poster">
+					<img src="{{ other_movie.poster_image }}" />
+				</div>
+			</div>
+			<div class="col span_5_of_11">
+				<div class="poster">
+					<img src="{{ current_movie.poster_image }}" />
+				</div>
+			</div>
+		</div>
 	</div>
-{% endfor %}
+	<div class="col span_7_of_11" id="below">
+		{% for row in common_actors %}
+		<div class="section group">
+			{% for actor in row %}
+			<div class="col span_1_of_6">
+				{{ actor.name }}
+				<div class="profile_picture">
+					<img src="{{ actor.image }}" />
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	{% endfor %}
+	</div>
 </div>
-
 <a href="{{ url_for('index') }}">Search again</a>
+
 {% endblock %}
+

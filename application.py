@@ -33,7 +33,7 @@ def index():
                 top_rentals_rt['movies'][0]['year'],
             )
             cache.set('top_rental', top_rental, timeout=60 * 60 * 24)
-            placeholder = top_rental.title
+            placeholder = top_rental
     return render_template("index.html", first_placeholder=placeholder)
 
 
