@@ -92,7 +92,8 @@ body {
 #above {
   letter-spacing: -0.1em; }
   #above #header {
-    margin-top: 3em; }
+    margin-top: 3em;
+    margin-bottom: 3em; }
     #above #header h1 {
       font-family: 'Bitter', serif;
       font-weight: bold;
