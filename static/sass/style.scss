@@ -5,11 +5,12 @@ $white: #ecf0f1;
 $black: #34495e;
 $grey: #bdc3c7;
 
-$background: #1abc9c;
+$background: #2c3e50;
+$color: #16a085;
 
 
 body {
-	font-family: 'Bevan', sans-serif;
+	font-family: 'Bevan', serif;
 	color: $white;
 	background: $background;
 	padding: 2em;
@@ -19,25 +20,21 @@ body {
 
 #above {
 	.question_background{
-		font-size: 2em;
+		font-size: 3em;
 		letter-spacing: -1px;
 		color: $white;
+		margin-top: 1em;
 	}
 
 	@media only screen and (max-width: $breakpoint) {
 		.question_background {
-			font-size: 1.5em;
+			font-size: 1.4em;
 			letter-spacing: 0px;
 		}
 	}
 
 	div {
 		line-height: 2.25em;
-	}
-
-	form {
-		margin-top: 3em;
-		font-size: 1.5em;
 	}
 
 	input {
@@ -58,7 +55,7 @@ body {
 	:-ms-input-placeholder { color: $black; }
 
 	.button {
-		background: $black;
+		background: $color;
 		font: inherit;
 		color: $white;
 	}
@@ -68,18 +65,37 @@ body {
 		color: $white;
 	}
 
-	.poster {
-		width: 100%;
-		overflow: hidden;
+	#posters{
+		font-size: 1.2em;
+		text-align: center;
 
-		img {
+		.poster {
 			width: 100%;
+			overflow: hidden;
+
+			img {
+				width: 100%;
+			}
+		}
+
+		a {
+			color: $white;
+			text-decoration: none;
+			background: $color;
+			padding: 0.2em 0.7em 0.2em 0.7em;
 		}
 	}
+
+	@media only screen and (max-width: $breakpoint) {
+		.poster {
+			display: none;
+		}
+	}
+
 }
 
-#below {
-
+#actors {
+	font-family: 'Lato', sans-serif;
 
 	.profile_picture{
 		width: 10em;

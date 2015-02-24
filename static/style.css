@@ -100,26 +100,24 @@ table {
   .span_1_of_11, .span_2_of_11, .span_3_of_11, .span_4_of_11, .span_5_of_11, .span_6_of_11, .span_7_of_11, .span_8_of_11, .span_9_of_11, .span_10_of_11, .span_11_of_11 {
     width: 100%; } }
 body {
-  font-family: 'Bevan', sans-serif;
+  font-family: 'Bevan', serif;
   color: #ecf0f1;
-  background: #1abc9c;
+  background: #2c3e50;
   padding: 2em;
   font-size: 16px;
   line-height: 1.75em; }
 
 #above .question_background {
-  font-size: 2em;
+  font-size: 3em;
   letter-spacing: -1px;
-  color: #ecf0f1; }
+  color: #ecf0f1;
+  margin-top: 1em; }
 @media only screen and (max-width: 580px) {
   #above .question_background {
-    font-size: 1.5em;
+    font-size: 1.4em;
     letter-spacing: 0px; } }
 #above div {
   line-height: 2.25em; }
-#above form {
-  margin-top: 3em;
-  font-size: 1.5em; }
 #above input {
   font: inherit;
   font-size: 0.75em;
@@ -139,24 +137,37 @@ body {
 #above :-ms-input-placeholder {
   color: #34495e; }
 #above .button {
-  background: #34495e;
+  background: #16a085;
   font: inherit;
   color: #ecf0f1; }
 #above #results {
   background-color: #34495e;
   color: #ecf0f1; }
-#above .poster {
-  width: 100%;
-  overflow: hidden; }
-  #above .poster img {
-    width: 100%; }
+#above #posters {
+  font-size: 1.2em;
+  text-align: center; }
+  #above #posters .poster {
+    width: 100%;
+    overflow: hidden; }
+    #above #posters .poster img {
+      width: 100%; }
+  #above #posters a {
+    color: #ecf0f1;
+    text-decoration: none;
+    background: #16a085;
+    padding: 0.2em 0.7em 0.2em 0.7em; }
+@media only screen and (max-width: 580px) {
+  #above .poster {
+    display: none; } }
 
-#below .profile_picture {
-  width: 10em;
-  height: 10em;
-  overflow: hidden;
-  border-radius: 50% 50%; }
-  #below .profile_picture img {
-    width: 100%; }
+#actors {
+  font-family: 'Lato', sans-serif; }
+  #actors .profile_picture {
+    width: 10em;
+    height: 10em;
+    overflow: hidden;
+    border-radius: 50% 50%; }
+    #actors .profile_picture img {
+      width: 100%; }
 
 /*# sourceMappingURL=style.css.map */
