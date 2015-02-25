@@ -13,17 +13,24 @@ body {
 	font-family: 'Bevan', serif;
 	color: $white;
 	background: $background;
-	padding: 2em;
+	padding: 8em;
 	font-size: 16px;
 	line-height: 1.75em;
 }
 
+@media only screen and (max-width: $breakpoint) {
+	body {
+		padding: 2em;
+	}
+}
+
 #above {
+
 	.question_background{
-		font-size: 3em;
+		font-size: 2.5em;
 		letter-spacing: -1px;
 		color: $white;
-		margin-top: 1em;
+		line-height: 2.25em;
 	}
 
 	@media only screen and (max-width: $breakpoint) {
@@ -33,9 +40,6 @@ body {
 		}
 	}
 
-	div {
-		line-height: 2.25em;
-	}
 
 	input {
 		font: inherit;
@@ -66,7 +70,7 @@ body {
 	}
 
 	#posters{
-		font-size: 1.2em;
+		font-size: 1em;
 		text-align: center;
 
 		.poster {
@@ -83,12 +87,18 @@ body {
 			text-decoration: none;
 			background: $color;
 			padding: 0.2em 0.7em 0.2em 0.7em;
+			margin-bottom: 1em;
+			display: block;
 		}
 	}
 
 	@media only screen and (max-width: $breakpoint) {
 		.poster {
 			display: none;
+		}
+
+		#posters {
+			font-size: 2em;
 		}
 	}
 
@@ -98,10 +108,11 @@ body {
 	font-family: 'Lato', sans-serif;
 
 	.profile_picture{
-		width: 10em;
-		height: 10em;
+		$width: 10em;
+
+		width: $width;
+		height: $width * 1.4;
 		overflow: hidden;
-		border-radius: 50% 50%;
 
 		img { width: 100%; }
 	}
