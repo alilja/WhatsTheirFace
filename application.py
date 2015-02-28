@@ -52,16 +52,16 @@ def results():
                     else:
                         top_rental = cache.get('top_rental')
                         if not top_rental:
-                            return render_template("empty_error.html", movie_name="")
+                            return render_template("error.html", error="No movie entered!")
                         else:
                             search_string = top_rental.title
                 else:
-                    return render_template("empty_error.html", movie_name="")
+                    return render_template("error.html", error="No movie entered!")
 
             try:
                 movie = find_movie(search_string)
             except MovieNotFound as not_found:
-                return render_template("error.html", movie_name=not_found.args[0])
+                return render_template("error.html", error="Movie \"{0}\" not found!".format(not_found.args[0]))
 
             if field_name == "movie_one":
                 session['movie'] = movie.title

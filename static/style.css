@@ -102,21 +102,25 @@ table {
 body {
   font-family: 'Bevan', serif;
   color: #ecf0f1;
-  background: #2c3e50;
-  padding: 8em;
+  background: #e74c3c;
+  padding: 3em 7em;
   font-size: 16px;
   line-height: 1.75em; }
 
 @media only screen and (max-width: 580px) {
   body {
     padding: 2em; } }
-#above .question_background {
+a {
+  color: #34495e; }
+
+#above .big_text {
   font-size: 2.5em;
   letter-spacing: -1px;
   color: #ecf0f1;
-  line-height: 2.25em; }
+  line-height: 2.25em;
+  text-align: center; }
 @media only screen and (max-width: 580px) {
-  #above .question_background {
+  #above .big_text {
     font-size: 1.4em;
     letter-spacing: 0px; } }
 #above input {
@@ -138,7 +142,7 @@ body {
 #above :-ms-input-placeholder {
   color: #34495e; }
 #above .button {
-  background: #16a085;
+  background: #34495e;
   font: inherit;
   color: #ecf0f1; }
 #above #results {
@@ -153,12 +157,12 @@ body {
     #above #posters .poster img {
       width: 100%; }
   #above #posters a {
+    background: #34495e;
     color: #ecf0f1;
-    text-decoration: none;
-    background: #16a085;
     padding: 0.2em 0.7em 0.2em 0.7em;
     margin-bottom: 1em;
-    display: block; }
+    display: block;
+    text-decoration: none; }
 @media only screen and (max-width: 580px) {
   #above .poster {
     display: none; }
@@ -166,12 +170,10 @@ body {
     font-size: 2em; } }
 
 #actors {
-  font-family: 'Lato', sans-serif; }
-  #actors .profile_picture {
-    width: 10em;
-    height: 14em;
-    overflow: hidden; }
-    #actors .profile_picture img {
-      width: 100%; }
+  font-family: 'Lato', sans-serif;
+  line-height: 2em;
+  text-align: center; }
+  #actors img {
+    width: 100%; }
 
 /*# sourceMappingURL=style.css.map */

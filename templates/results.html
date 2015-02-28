@@ -28,14 +28,17 @@
 	<div class="col span_1_of_11"></div>
 	<div class="col span_8_of_11" id="actors">
 	{% for actor in common_actors %}
+		{% if loop.cycle("newline", "", "endnewline") == "newline" %}
 		<div class="section group">
-			<div class="col span_1_of_6">
+		{% endif %}
+			<div class="col span_3_of_11">
 				{{ actor.name }}
-				<div class="profile_picture">
-					<img src="{{ actor.image }}" />
-				</div>
+				<img src="{{ actor.image }}" />
 			</div>
+			<div class="col span_1_of_11"></div>
+		{% if loop.cycle("newline", "", "endnewline") == "endnewline" %}
 		</div>
+		{% endif %}
 	{% endfor %}
 	</div>
 </div>
