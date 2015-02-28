@@ -31,11 +31,11 @@
 		{% if loop.cycle("newline", "", "endnewline") == "newline" %}
 		<div class="section group">
 		{% endif %}
-			<div class="col span_3_of_11">
+			<div class="col span_3_of_11 actor_picture">
 				{{ actor.name }}
 				<img src="{{ actor.image }}" />
 			</div>
-			<div class="col span_1_of_11"></div>
+			<div class="col span_1_of_11 spacer"></div>
 		{% if loop.cycle("newline", "", "endnewline") == "endnewline" %}
 		</div>
 		{% endif %}

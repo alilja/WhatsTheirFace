@@ -167,7 +167,10 @@ a {
   #above .poster {
     display: none; }
   #above #posters {
-    font-size: 2em; } }
+    font-size: 2em; }
+    #above #posters a {
+      padding: 1em;
+      font-size: 0.75em; } }
 
 #actors {
   font-family: 'Lato', sans-serif;
@@ -175,5 +178,13 @@ a {
   text-align: center; }
   #actors img {
     width: 100%; }
+
+@media only screen and (max-width: 580px) {
+  #actors .actor_picture {
+    width: 31%;
+    margin-right: 2%; }
+  #actors .spacer {
+    width: 0;
+    margin: 0; } }
 
 /*# sourceMappingURL=style.css.map */

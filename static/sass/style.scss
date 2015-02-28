@@ -104,7 +104,13 @@ a {
 
 		#posters {
 			font-size: 2em;
+
+			a {
+				padding: 1em;
+				font-size: 0.75em;
+			}
 		}
+
 	}
 
 }
@@ -116,4 +122,18 @@ a {
 
 
 	img { width: 100%; }
+}
+
+@media only screen and (max-width: $breakpoint) {
+	#actors {
+		.actor_picture {
+			width: 31%;
+			margin-right: 2%;
+		}
+
+		.spacer {
+			width: 0;
+			margin: 0;
+		}
+	}
 }
